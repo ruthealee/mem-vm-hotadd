@@ -6,7 +6,7 @@ if [ $(grep offline /sys/devices/system/memory/memory*/state | wc -l) -eq 0 ]; 	
 		echo "All memory online";	#if all is online ends and just outputs current memory usage
 	else 
 		echo "There are $(echo "$MEM" | wc -l) modules offline:";	#echo's number of offline modules
-		echo "$MEM"| awk -F '/' '{print $6}';	#sets field marker as / and brings back the second field (memory1/2/3/etc)
+		echo "$MEM"| awk -F '/' '{print $6}';	#sets field marker as / and brings back the sixth field (memory1/2/3/etc)
 		echo "Bringing memory online"; 			
 		for x in $(grep offline /sys/devices/system/memory/memory*/state |awk -F ':' '{print $1}');  
 			do echo "online" > $x ; #writes to /memory*/state online
